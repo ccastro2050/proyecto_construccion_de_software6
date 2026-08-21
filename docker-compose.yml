@@ -1,11 +1,11 @@
 # ==============================================================
-# Proyecto Construcción de Software — versión 5:
-# api_facturas (C#/ASP.NET Core) + TRES motores con la misma BD
+# Proyecto Construcción de Software — versión 6:
+# api_facturas (:8042) + API GENÉRICA (:8043) + TRES motores
 #
-#                                 ┌→ PostgreSQL (bdfacturas, :15442)
-#   Navegador → API (C#, :8042) ─┼→ SQL Server (bdfacturas, :11442)
-#                                 └→ MariaDB   (bdfacturas, :13342)
-#                                      el interruptor: MOTOR_BD
+#   Navegador → API FACTURAS (C#, :8042) ─┐   ┌→ PostgreSQL (:15442)
+#               (una ruta por entidad)     ├──┼→ SQL Server (:11442)
+#   Navegador → API GENÉRICA (C#, :8043) ─┘   └→ MariaDB   (:13342)
+#               (/api/{tabla} + JWT)            interruptor: MOTOR_BD
 #
 # Uso: docker compose up -d --build     (UN solo comando)
 #   La API habla con PostgreSQL por defecto; para cambiar de motor
@@ -13,8 +13,7 @@
 #                      docker compose up -d api-facturas
 # Reset de las BD: docker compose down -v && docker compose up -d
 #
-# Este archivo CRECE por versiones: v6 sumará la API genérica,
-# v7 el front Flask (Jinja2).
+# Este archivo CRECE por versiones: v7 sumará el front Flask (Jinja2).
 # ==============================================================
 services:
 
@@ -124,6 +123,33 @@ services:
       mariadb:
         condition: service_healthy
         # ↑ v5: …y cuando el tercer motor responde (se siembra solo).
+
+  # --- API GENÉRICA C# (v6): CRUD sobre CUALQUIER tabla + JWT ---
+  # El contraste con api_facturas: allá una ruta por entidad con
+  # validación tipada; aquí /api/{tabla} descubre las columnas en
+  # runtime. Mismos tres motores, mismo interruptor.
+  api-generica-csharp:
+    build: ./api_generica_csharp
+    volumes:
+      - ./api_generica_csharp:/app   # el código montado: dotnet watch recompila
+      - /app/bin
+      - /app/obj
+    restart: unless-stopped
+    ports:
+      - "8043:8043"                  # http://localhost:8043/swagger
+    environment:
+      # El MISMO interruptor MOTOR_BD gobierna las dos APIs:
+      DatabaseProvider: ${MOTOR_BD:-postgres}
+      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=bdfacturas_postgres_local;Username=postgres;Password=Construccion123!;Pooling=true;Maximum Pool Size=100;"
+      ConnectionStrings__SqlServer: "Server=sqlserver,1433;Database=bdfacturas_sqlserver_local;User Id=sa;Password=Construccion123!;TrustServerCertificate=True;"
+      ConnectionStrings__MariaDB: "Server=mariadb;Port=3306;Database=bdfacturas_mariadb_local;Uid=root;Pwd=Construccion123!;Allow User Variables=true;CharSet=utf8mb4;"
+    depends_on:
+      postgres:
+        condition: service_healthy
+      sqlserver-init:
+        condition: service_completed_successfully
+      mariadb:
+        condition: service_healthy
 
 volumes:
   pgdata:      # declaración del volumen nombrado (la "memoria" de la BD)
