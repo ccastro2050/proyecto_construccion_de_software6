@@ -1,5 +1,13 @@
 # Plan — Versión 6: la API genérica de plataforma
 
+> **Nota (agosto de 2026):** el curso adoptó **Dapper** como
+> micro-ejecutor en TODOS los repositorios: el SQL sigue escrito a mano
+> y parametrizado; cambió el mapeo (`QueryAsync`/`ExecuteAsync` en vez
+> del ciclo DataReader) y los SPs se llaman con `DynamicParameters`.
+> Las tablas de "calco" entre dialectos siguen valiendo para los
+> PROVEEDORES (Npgsql/SqlClient/MySqlConnector) que Dapper usa por debajo.
+
+
 > Cómo se integra lo especificado en [2_spec.md](2_spec.md). A diferencia
 > de las versiones anteriores, la v6 no se construye rebanada por
 > rebanada: el componente `api_generica_csharp/` es **infraestructura de
