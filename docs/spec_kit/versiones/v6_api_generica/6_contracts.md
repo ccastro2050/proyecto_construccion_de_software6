@@ -5,12 +5,12 @@
 > ejemplos completos, en sus manuales:
 > **[GUIA_USO_ENTIDADES](../../../../api_generica_csharp/GUIA_USO_ENTIDADES.md)** y
 > **[GUIA_USO_PROCEDIMIENTOS](../../../../api_generica_csharp/GUIA_USO_PROCEDIMIENTOS.md)**
-> (más `ApiGenericaCsharp.http` y el Swagger en :8043/swagger).
+> (más `ApiGenericaCsharp.http` y el Swagger en :8048/swagger).
 > Aquí, el mapa de grupos:
 
 ---
 
-## Base: `http://localhost:8043`
+## Base: `http://localhost:8048`
 
 | Grupo | Endpoints | Notas |
 |---|---|---|
@@ -31,7 +31,7 @@ api_facturas).
 
 ## El contraste con api_facturas (la tabla que resume el curso)
 
-| | api_facturas (:8042) | api_generica (:8043) |
+| | api_facturas (:8047) | api_generica (:8048) |
 |---|---|---|
 | Rutas | una por entidad | `/api/{tabla}` para todas |
 | Validación | tipada en la frontera (422 con errores[]) | contra el catálogo, en runtime |

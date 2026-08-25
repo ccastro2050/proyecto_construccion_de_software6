@@ -24,7 +24,7 @@
 versiones una API **por entidad**: una ruta por tabla, peticiones tipadas
 por verbo, validación en la frontera. La v6 pone al lado la otra
 filosofía: una **API genérica de plataforma** (`api_generica_csharp`,
-puerto **8043**) donde `/api/{tabla}` opera CUALQUIER tabla descubriendo
+puerto **8048**) donde `/api/{tabla}` opera CUALQUIER tabla descubriendo
 sus columnas en runtime — filas como diccionario columna→valor.
 
 Ninguna es "mejor": la por-entidad da contratos exactos y validación
@@ -87,7 +87,7 @@ modelo de seguridad; la genérica protege sus lecturas).
 1. **Regresión intacta:** la batería completa de la v5 (v1+v2+v3 por
    entidad) pasa tal cual contra el motor por defecto —
    `"version":"v6"` en el diagnóstico de api_facturas es el único cambio.
-2. **El componente arriba:** `GET :8043/api/diagnostico/conexion`
+2. **El componente arriba:** `GET :8048/api/diagnostico/conexion`
    responde con el motor activo.
 3. **El flujo JWT completo:** crear un usuario vía
    `POST /api/usuario?camposEncriptar=contrasena` (el hash queda BCrypt)

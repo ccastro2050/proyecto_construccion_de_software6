@@ -10,13 +10,13 @@
 ## 0. Punto de partida
 
 Su proyecto con la **v5 funcionando** (regresión triple en verde, sus
-puertos +100). Sus puertos nuevos: **API genérica 8143**.
+puertos +100). Sus puertos nuevos: **API genérica 8148**.
 
 ## Parte A — Integrar (sin IA: son copias y configuración)
 
 1. Copie `api_generica_csharp/` completo del clon del curso.
 2. Adapte `appsettings.json` (sus puertos +100, SU clave JWT de mínimo
-   32 caracteres) y el `Dockerfile` (8143).
+   32 caracteres) y el `Dockerfile` (8148).
 3. Agregue el servicio al `docker-compose.yml`
    ([plan §4](3_plan.md)) con `DatabaseProvider: ${MOTOR_BD:-postgres}`.
 4. Corra el [quickstart](7_quickstart.md) completo (§2 a §4). Hasta aquí

@@ -2,7 +2,7 @@
 
 Guia practica para ejecutar **stored procedures y funciones** de base de datos a traves de la API, desde Swagger, Postman, JavaScript, Python y Blazor Server.
 
-> **URL base**: `http://localhost:8043`
+> **URL base**: `http://localhost:8048`
 > **Controlador**: `ProcedimientosController` → ruta `/api/procedimientos`
 
 ---
@@ -140,7 +140,7 @@ POST /api/procedimientos/ejecutarsp?camposEncriptar=contrasena
 
 ### Paso a paso
 
-1. Abrir `http://localhost:8043/swagger`
+1. Abrir `http://localhost:8048/swagger`
 2. Buscar **POST** `/api/procedimientos/ejecutarsp`
 3. Click en **Try it out**
 4. En el body JSON escribir:
@@ -184,7 +184,7 @@ POST /api/procedimientos/ejecutarsp?camposEncriptar=contrasena
 ### Listar todas las facturas
 
 ```
-POST http://localhost:8043/api/procedimientos/ejecutarsp
+POST http://localhost:8048/api/procedimientos/ejecutarsp
 Content-Type: application/json
 
 {
@@ -196,7 +196,7 @@ Content-Type: application/json
 ### Consultar factura #1
 
 ```
-POST http://localhost:8043/api/procedimientos/ejecutarsp
+POST http://localhost:8048/api/procedimientos/ejecutarsp
 Content-Type: application/json
 
 {
@@ -209,7 +209,7 @@ Content-Type: application/json
 ### Insertar factura con productos
 
 ```
-POST http://localhost:8043/api/procedimientos/ejecutarsp
+POST http://localhost:8048/api/procedimientos/ejecutarsp
 Content-Type: application/json
 
 {
@@ -224,7 +224,7 @@ Content-Type: application/json
 ### Actualizar factura #1
 
 ```
-POST http://localhost:8043/api/procedimientos/ejecutarsp
+POST http://localhost:8048/api/procedimientos/ejecutarsp
 Content-Type: application/json
 
 {
@@ -240,7 +240,7 @@ Content-Type: application/json
 ### Eliminar factura #1
 
 ```
-POST http://localhost:8043/api/procedimientos/ejecutarsp
+POST http://localhost:8048/api/procedimientos/ejecutarsp
 Content-Type: application/json
 
 {
@@ -257,7 +257,7 @@ Content-Type: application/json
 ### Funcion generica para llamar SPs
 
 ```javascript
-const API_SP = 'http://localhost:8043/api/procedimientos/ejecutarsp';
+const API_SP = 'http://localhost:8048/api/procedimientos/ejecutarsp';
 
 /**
  * Ejecuta un stored procedure via la API.
@@ -398,7 +398,7 @@ console.log(exito ? 'Eliminada' : `Error: ${mensaje}`);
     </table>
 
     <script>
-        const API_SP = 'http://localhost:8043/api/procedimientos/ejecutarsp';
+        const API_SP = 'http://localhost:8048/api/procedimientos/ejecutarsp';
 
         async function ejecutarSP(nombreSP, parametros = {}) {
             const resp = await fetch(API_SP, {
@@ -454,7 +454,7 @@ console.log(exito ? 'Eliminada' : `Error: ${mensaje}`);
 import requests
 import json
 
-API_SP = 'http://localhost:8043/api/procedimientos/ejecutarsp'
+API_SP = 'http://localhost:8048/api/procedimientos/ejecutarsp'
 
 def ejecutar_sp(nombre_sp, parametros=None):
     """
@@ -580,7 +580,7 @@ namespace FrontBlazor.Services;
 public class SpService
 {
     private readonly HttpClient _http;
-    private const string URL = "http://localhost:8043/api/procedimientos/ejecutarsp";
+    private const string URL = "http://localhost:8048/api/procedimientos/ejecutarsp";
 
     public SpService(HttpClient http)
     {

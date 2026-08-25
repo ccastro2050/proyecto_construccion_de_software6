@@ -14,7 +14,7 @@
       sus GUIA_USO y su spec kit interno).
 - [ ] Adaptar `appsettings.json`: cadenas de SUS puertos, su clave JWT
       (mínimo 32 caracteres), `DatabaseProvider: Postgres`.
-- [ ] `Dockerfile`: puerto 8043 (estudiante: 8143).
+- [ ] `Dockerfile`: puerto 8048 (estudiante: 8148).
 
 **Verificar:** `dotnet build` del componente compila.
 
@@ -27,7 +27,7 @@
 - [ ] `api_facturas/Program.cs`: diagnóstico a `"version":"v6"` (único
       cambio del componente viejo).
 
-**Verificar:** `docker compose up -d --build` → :8042 y :8043 responden.
+**Verificar:** `docker compose up -d --build` → :8047 y :8048 responden.
 
 ## Fase 3 — El recorrido de seguridad
 

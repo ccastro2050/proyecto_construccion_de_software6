@@ -40,7 +40,7 @@ api_generica_csharp/               ← el componente completo (~10.000 líneas)
 
 | Archivo | Qué crece |
 |---|---|
-| `docker-compose.yml` | ★ servicio `api-generica-csharp` (:8043) con las 3 cadenas y `DatabaseProvider: ${MOTOR_BD:-postgres}` — el MISMO interruptor para las dos APIs |
+| `docker-compose.yml` | ★ servicio `api-generica-csharp` (:8048) con las 3 cadenas y `DatabaseProvider: ${MOTOR_BD:-postgres}` — el MISMO interruptor para las dos APIs |
 | `api_facturas/Program.cs` | ★ solo el diagnóstico: `"version": "v6"` |
 
 **Intocables:** TODO el resto de `api_facturas` (RNF1) y `db/`.
@@ -79,7 +79,7 @@ Las MISMAS capas del curso, con un giro genérico:
 
 ## 4. Integración al compose
 
-- Puerto **8043** (curso; estudiante 8143). Swagger en `/swagger`.
+- Puerto **8048** (curso; estudiante 8148). Swagger en `/swagger`.
 - Las tres cadenas viajan por variables `ConnectionStrings__X`; el
   interruptor es el MISMO `MOTOR_BD` de api_facturas: un solo `$env:`
   cambia el motor de TODO el sistema.

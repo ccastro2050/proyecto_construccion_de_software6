@@ -38,19 +38,19 @@ completa en PostgreSQL) y la API:
 
 | Qué | Dónde |
 |---|---|
-| **API Facturas** — diagnóstico | http://localhost:8042/ |
-| **Swagger** (documentación interactiva: ver y probar los endpoints) | http://localhost:8042/swagger |
-| Listar productos | http://localhost:8042/api/producto |
-| PostgreSQL (para SQLTools/pgAdmin, opcional) | `localhost:15442` · `postgres`/`Construccion123!` |
-| SQL Server (opcional — v4) | `localhost,11442` · `sa`/`Construccion123!` |
-| MariaDB (opcional — v5) | `localhost:13342` · `root`/`Construccion123!` |
-| **API GENÉRICA** (v6) — Swagger | http://localhost:8043/swagger |
+| **API Facturas** — diagnóstico | http://localhost:8047/ |
+| **Swagger** (documentación interactiva: ver y probar los endpoints) | http://localhost:8047/swagger |
+| Listar productos | http://localhost:8047/api/producto |
+| PostgreSQL (para SQLTools/pgAdmin, opcional) | `localhost:15447` · `postgres`/`Construccion123!` |
+| SQL Server (opcional — v4) | `localhost,11447` · `sa`/`Construccion123!` |
+| MariaDB (opcional — v5) | `localhost:13347` · `root`/`Construccion123!` |
+| **API GENÉRICA** (v6) — Swagger | http://localhost:8048/swagger |
 
 Pruebe la joya didáctica de la v1: PUT con solo `{"stock": 99}` → 422; el
 mismo body en PATCH → 200. Esa diferencia es parte de lo que enseña la
 versión (contratos exactos en el spec kit).
 
-> ℹ️ Este proyecto usa los puertos 8042 y 15442: si alguno ya está ocupado
+> ℹ️ Este proyecto usa los puertos 8047 y 15447: si alguno ya está ocupado
 > en su máquina, cámbielo en `docker-compose.yml` (el lado izquierdo del
 > `"puerto:puerto"`).
 >
@@ -117,10 +117,10 @@ proyecto_construccion_de_software6/
 ├── postman/                     # La colección de Postman lista para importar:
 │                                #   los 13 endpoints en orden didáctico (alternativa a Swagger)
 │
-├── api_facturas/                # LA API DE LA v1 — C#/ASP.NET Core (puerto 8042)
+├── api_facturas/                # LA API DE LA v1 — C#/ASP.NET Core (puerto 8047)
 │   ├── ApiFacturas.csproj       # El proyecto .NET (paquetes: Npgsql, Dapper y Swashbuckle)
 │   ├── Program.cs               # Punto de entrada: ENSAMBLADOR (DI) + 422 + rutas
-│   ├── appsettings.json         # Cadena de conexión (default localhost:15442)
+│   ├── appsettings.json         # Cadena de conexión (default localhost:15447)
 │   ├── Dockerfile               # Imagen sdk:10.0 + dotnet watch
 │   ├── Controllers/             # Capa 1 — HTTP: atributos de verbo y try/catch → códigos
 │   ├── Modelos/                 # Los MODELOS = las clases ENTIDAD (v1: Producto)

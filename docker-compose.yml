@@ -1,10 +1,10 @@
 # ==============================================================
 # Proyecto Construcción de Software — versión 6:
-# api_facturas (:8042) + API GENÉRICA (:8043) + TRES motores
+# api_facturas (:8047) + API GENÉRICA (:8048) + TRES motores
 #
-#   Navegador → API FACTURAS (C#, :8042) ─┐   ┌→ PostgreSQL (:15442)
-#               (una ruta por entidad)     ├──┼→ SQL Server (:11442)
-#   Navegador → API GENÉRICA (C#, :8043) ─┘   └→ MariaDB   (:13342)
+#   Navegador → API FACTURAS (C#, :8047) ─┐   ┌→ PostgreSQL (:15447)
+#               (una ruta por entidad)     ├──┼→ SQL Server (:11447)
+#   Navegador → API GENÉRICA (C#, :8048) ─┘   └→ MariaDB   (:13347)
 #               (/api/{tabla} + JWT)            interruptor: MOTOR_BD
 #
 # Uso: docker compose up -d --build     (UN solo comando)
@@ -30,7 +30,7 @@ services:
       # necesita contenedor inicializador:
       - ./db/bdfacturas_postgres.sql:/docker-entrypoint-initdb.d/bdfacturas_postgres.sql:ro
     ports:
-      - "15442:5432"     # puerto en su PC (para SQLTools/pgAdmin opcional)
+      - "15447:5432"     # puerto en su PC (para SQLTools/pgAdmin opcional)
     healthcheck:
       # ¿La BD ya RESPONDE consultas? (no solo "el contenedor existe")
       test: ["CMD-SHELL", "pg_isready -U postgres -d bdfacturas_postgres_local"]
@@ -48,7 +48,7 @@ services:
     volumes:
       - mssqldata:/var/opt/mssql
     ports:
-      - "11442:1433"     # puerto en su PC (para SQLTools/pgAdmin de SQL opcional)
+      - "11447:1433"     # puerto en su PC (para SQLTools/pgAdmin de SQL opcional)
     healthcheck:
       test: ["CMD-SHELL", "/opt/mssql-tools18/bin/sqlcmd -S localhost -U sa -P \"$$MSSQL_SA_PASSWORD\" -C -Q 'SELECT 1' -b"]
       interval: 10s
@@ -80,7 +80,7 @@ services:
       - mariadbdata:/var/lib/mysql
       - ./db/bdfacturas_mariadb.sql:/docker-entrypoint-initdb.d/bdfacturas_mariadb.sql:ro
     ports:
-      - "13342:3306"     # puerto en su PC (para HeidiSQL/DBeaver opcional)
+      - "13347:3306"     # puerto en su PC (para HeidiSQL/DBeaver opcional)
     healthcheck:
       test: ["CMD", "healthcheck.sh", "--connect", "--innodb_initialized"]
       interval: 5s
@@ -96,7 +96,7 @@ services:
       - /app/obj                 #   sin mezclarse con los compilados de Windows
     restart: unless-stopped
     ports:
-      - "8042:8042"              # http://localhost:8042
+      - "8047:8047"              # http://localhost:8047
     environment:
       # La cadena usa el NOMBRE del servicio como host (postgres:5432),
       # no localhost: dentro de la red interna de compose los servicios
@@ -136,7 +136,7 @@ services:
       - /app/obj
     restart: unless-stopped
     ports:
-      - "8043:8043"                  # http://localhost:8043/swagger
+      - "8048:8048"                  # http://localhost:8048/swagger
     environment:
       # El MISMO interruptor MOTOR_BD gobierna las dos APIs:
       DatabaseProvider: ${MOTOR_BD:-postgres}

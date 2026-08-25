@@ -47,7 +47,7 @@ tabla). api_facturas queda abierta en la v6: protegerla con el mismo
 token es un ejercicio natural del front (v7), cuando haya login de
 verdad. Endurecer todo hoy solo estorbaría la regresión.
 
-## D6 — Puerto 8043
+## D6 — Puerto 8048
 
-La familia del curso: 8042 (facturas) → **8043 (genérica)**. Estudiante:
-8143. El front (v7) tomará 8044.
+La familia del curso: 8047 (facturas) → **8048 (genérica)**. Estudiante:
+8148. El front (v7) tomará 8044.

@@ -2,7 +2,7 @@
 
 Guia practica para consumir el **CRUD generico** de la API desde Swagger, Postman y cualquier frontend.
 
-> **URL base**: `http://localhost:8043`
+> **URL base**: `http://localhost:8048`
 > **Controlador**: `EntidadesController` → ruta `/api/{tabla}`
 
 ---
@@ -78,7 +78,7 @@ Obtiene todos los registros de una tabla.
 
 ### Desde Swagger
 
-1. Abrir `http://localhost:8043/swagger`
+1. Abrir `http://localhost:8048/swagger`
 2. Buscar **GET** `/api/{tabla}`
 3. Click en **Try it out**
 4. En `tabla` escribir: `producto`
@@ -88,20 +88,20 @@ Obtiene todos los registros de una tabla.
 ### Desde Postman
 
 ```
-GET http://localhost:8043/api/producto
+GET http://localhost:8048/api/producto
 ```
 
 Con limite:
 
 ```
-GET http://localhost:8043/api/producto?limite=5
+GET http://localhost:8048/api/producto?limite=5
 ```
 
 ### Desde un Frontend (JavaScript fetch)
 
 ```javascript
 // Listar todos los productos
-const respuesta = await fetch('http://localhost:8043/api/producto');
+const respuesta = await fetch('http://localhost:8048/api/producto');
 const json = await respuesta.json();
 const productos = json.datos;  // Array de objetos
 
@@ -115,7 +115,7 @@ console.log(productos);
 
 ```javascript
 // Con limite
-const respuesta = await fetch('http://localhost:8043/api/producto?limite=5');
+const respuesta = await fetch('http://localhost:8048/api/producto?limite=5');
 const json = await respuesta.json();
 console.log(`Total: ${json.total}, Registros: ${json.datos.length}`);
 ```
@@ -125,7 +125,7 @@ console.log(`Total: ${json.total}, Registros: ${json.datos.length}`);
 ```python
 import requests
 
-respuesta = requests.get('http://localhost:8043/api/producto')
+respuesta = requests.get('http://localhost:8048/api/producto')
 datos = respuesta.json()
 productos = datos.get('datos', [])
 
@@ -146,7 +146,7 @@ for p in productos:
     {
         // Listar todos los productos
         var respuesta = await Http.GetFromJsonAsync<JsonElement>(
-            "http://localhost:8043/api/producto");
+            "http://localhost:8048/api/producto");
 
         productos = respuesta.GetProperty("datos")
             .Deserialize<List<Dictionary<string, object>>>();
@@ -163,7 +163,7 @@ using System.Text.Json;
 public class ApiService
 {
     private readonly HttpClient _http;
-    private const string BASE_URL = "http://localhost:8043/api";
+    private const string BASE_URL = "http://localhost:8048/api";
 
     public ApiService(HttpClient http)
     {
@@ -231,20 +231,20 @@ Obtiene registros que coincidan con un campo y valor especifico.
 ### Desde Postman
 
 ```
-GET http://localhost:8043/api/producto/codigo/PR001
+GET http://localhost:8048/api/producto/codigo/PR001
 ```
 
 Filtrar por otro campo (no solo clave primaria):
 
 ```
-GET http://localhost:8043/api/persona/tipodocumento/CC
+GET http://localhost:8048/api/persona/tipodocumento/CC
 ```
 
 ### Desde un Frontend (JavaScript fetch)
 
 ```javascript
 // Obtener un producto por su codigo
-const respuesta = await fetch('http://localhost:8043/api/producto/codigo/PR001');
+const respuesta = await fetch('http://localhost:8048/api/producto/codigo/PR001');
 const json = await respuesta.json();
 const producto = json.datos[0];  // Primer (y unico) resultado
 
@@ -254,7 +254,7 @@ console.log(producto.valorunitario);   // 2500000
 
 ```javascript
 // Filtrar personas por tipo de documento
-const respuesta = await fetch('http://localhost:8043/api/persona/tipodocumento/CC');
+const respuesta = await fetch('http://localhost:8048/api/persona/tipodocumento/CC');
 const json = await respuesta.json();
 console.log(`${json.total} personas con CC`);
 ```
@@ -265,7 +265,7 @@ console.log(`${json.total} personas con CC`);
 import requests
 
 # Obtener producto por codigo
-resp = requests.get('http://localhost:8043/api/producto/codigo/PR001')
+resp = requests.get('http://localhost:8048/api/producto/codigo/PR001')
 datos = resp.json()
 producto = datos['datos'][0]
 print(f"{producto['nombre']} → ${producto['valorunitario']:,.0f}")
@@ -353,7 +353,7 @@ Crea un nuevo registro en la tabla. Los datos van en el body como JSON.
 ### Desde Postman
 
 ```
-POST http://localhost:8043/api/producto
+POST http://localhost:8048/api/producto
 Content-Type: application/json
 
 {
@@ -367,7 +367,7 @@ Content-Type: application/json
 **Con encriptacion de contrasena** (para tabla usuario):
 
 ```
-POST http://localhost:8043/api/usuario?camposEncriptar=contrasena
+POST http://localhost:8048/api/usuario?camposEncriptar=contrasena
 Content-Type: application/json
 
 {
@@ -391,7 +391,7 @@ const nuevoProducto = {
   valorunitario: 350000
 };
 
-const respuesta = await fetch('http://localhost:8043/api/producto', {
+const respuesta = await fetch('http://localhost:8048/api/producto', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(nuevoProducto)
@@ -415,7 +415,7 @@ const nuevoUsuario = {
   fkcodpersona: "P001"
 };
 
-const respuesta = await fetch('http://localhost:8043/api/usuario?camposEncriptar=contrasena', {
+const respuesta = await fetch('http://localhost:8048/api/usuario?camposEncriptar=contrasena', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(nuevoUsuario)
@@ -435,7 +435,7 @@ nuevo = {
     "valorunitario": 350000
 }
 
-resp = requests.post('http://localhost:8043/api/producto', json=nuevo)
+resp = requests.post('http://localhost:8048/api/producto', json=nuevo)
 
 if resp.ok:
     print("Creado:", resp.json()['mensaje'])
@@ -453,7 +453,7 @@ usuario = {
 }
 
 resp = requests.post(
-    'http://localhost:8043/api/usuario',
+    'http://localhost:8048/api/usuario',
     json=usuario,
     params={"camposEncriptar": "contrasena"}
 )
@@ -546,7 +546,7 @@ Actualiza un registro existente. La clave primaria va en la URL, los datos a mod
 ### Desde Postman
 
 ```
-PUT http://localhost:8043/api/producto/codigo/PR999
+PUT http://localhost:8048/api/producto/codigo/PR999
 Content-Type: application/json
 
 {
@@ -564,7 +564,7 @@ const cambios = {
   valorunitario: 399000
 };
 
-const respuesta = await fetch('http://localhost:8043/api/producto/codigo/PR999', {
+const respuesta = await fetch('http://localhost:8048/api/producto/codigo/PR999', {
   method: 'PUT',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(cambios)
@@ -590,7 +590,7 @@ cambios = {
 }
 
 resp = requests.put(
-    'http://localhost:8043/api/producto/codigo/PR999',
+    'http://localhost:8048/api/producto/codigo/PR999',
     json=cambios
 )
 
@@ -662,14 +662,14 @@ Elimina un registro por su clave primaria.
 ### Desde Postman
 
 ```
-DELETE http://localhost:8043/api/producto/codigo/PR999
+DELETE http://localhost:8048/api/producto/codigo/PR999
 ```
 
 ### Desde un Frontend (JavaScript fetch)
 
 ```javascript
 // Eliminar el producto PR999
-const respuesta = await fetch('http://localhost:8043/api/producto/codigo/PR999', {
+const respuesta = await fetch('http://localhost:8048/api/producto/codigo/PR999', {
   method: 'DELETE'
 });
 
@@ -687,7 +687,7 @@ if (respuesta.ok) {
 ```python
 import requests
 
-resp = requests.delete('http://localhost:8043/api/producto/codigo/PR999')
+resp = requests.delete('http://localhost:8048/api/producto/codigo/PR999')
 
 if resp.ok:
     print("Eliminado:", resp.json()['mensaje'])
@@ -759,7 +759,7 @@ Compara una contrasena en texto plano contra el hash BCrypt almacenado en la BD.
 ### Desde Postman
 
 ```
-POST http://localhost:8043/api/usuario/verificar-contrasena
+POST http://localhost:8048/api/usuario/verificar-contrasena
 Content-Type: application/json
 
 {
@@ -780,7 +780,7 @@ const credenciales = {
   valorContrasena: "miPassword123"
 };
 
-const respuesta = await fetch('http://localhost:8043/api/usuario/verificar-contrasena', {
+const respuesta = await fetch('http://localhost:8048/api/usuario/verificar-contrasena', {
   method: 'POST',
   headers: { 'Content-Type': 'application/json' },
   body: JSON.stringify(credenciales)
@@ -808,7 +808,7 @@ credenciales = {
 }
 
 resp = requests.post(
-    'http://localhost:8043/api/usuario/verificar-contrasena',
+    'http://localhost:8048/api/usuario/verificar-contrasena',
     json=credenciales
 )
 
@@ -890,7 +890,7 @@ Retorna metadata sobre los endpoints disponibles.
 ### Desde cualquier cliente
 
 ```
-GET http://localhost:8043/api/info
+GET http://localhost:8048/api/info
 ```
 
 ---
@@ -936,7 +936,7 @@ Estas son las tablas de la BD `bdfacturas_postgres_local`:
 ### Paso 1 - Crear
 
 ```
-POST http://localhost:8043/api/producto
+POST http://localhost:8048/api/producto
 
 {
   "codigo": "PR999",
@@ -949,13 +949,13 @@ POST http://localhost:8043/api/producto
 ### Paso 2 - Consultar
 
 ```
-GET http://localhost:8043/api/producto/codigo/PR999
+GET http://localhost:8048/api/producto/codigo/PR999
 ```
 
 ### Paso 3 - Actualizar precio
 
 ```
-PUT http://localhost:8043/api/producto/codigo/PR999
+PUT http://localhost:8048/api/producto/codigo/PR999
 
 {
   "valorunitario": 195000
@@ -965,19 +965,19 @@ PUT http://localhost:8043/api/producto/codigo/PR999
 ### Paso 4 - Verificar cambio
 
 ```
-GET http://localhost:8043/api/producto/codigo/PR999
+GET http://localhost:8048/api/producto/codigo/PR999
 ```
 
 ### Paso 5 - Eliminar
 
 ```
-DELETE http://localhost:8043/api/producto/codigo/PR999
+DELETE http://localhost:8048/api/producto/codigo/PR999
 ```
 
 ### Paso 6 - Confirmar eliminacion
 
 ```
-GET http://localhost:8043/api/producto/codigo/PR999
+GET http://localhost:8048/api/producto/codigo/PR999
 → 404 Not Found
 ```
 
@@ -1010,7 +1010,7 @@ GET http://localhost:8043/api/producto/codigo/PR999
     </form>
 
     <script>
-        const API = 'http://localhost:8043/api/producto';
+        const API = 'http://localhost:8048/api/producto';
 
         // LISTAR
         async function cargar() {
@@ -1074,7 +1074,7 @@ GET http://localhost:8043/api/producto/codigo/PR999
 ```python
 import requests
 
-API = 'http://localhost:8043/api'
+API = 'http://localhost:8048/api'
 
 # Listar todos los productos
 def listar_productos():
@@ -1139,7 +1139,7 @@ namespace FrontBlazor.Services;
 public class ApiService
 {
     private readonly HttpClient _http;
-    private const string BASE_URL = "http://localhost:8043/api";
+    private const string BASE_URL = "http://localhost:8048/api";
 
     public ApiService(HttpClient http)
     {
