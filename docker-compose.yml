@@ -1,11 +1,11 @@
 # ==============================================================
 # Proyecto Construcción de Software — versión 6:
-# api_facturas (:8047) + API GENÉRICA (:8048) + TRES motores
+# api_facturas (:8047) + TRES motores
 #
-#   Navegador → API FACTURAS (C#, :8047) ─┐   ┌→ PostgreSQL (:15447)
-#               (una ruta por entidad)     ├──┼→ SQL Server (:11447)
-#   Navegador → API GENÉRICA (C#, :8048) ─┘   └→ MariaDB   (:13347)
-#               (/api/{tabla} + JWT)            interruptor: MOTOR_BD
+#   Navegador → API FACTURAS (C#, :8047) ──┬→ PostgreSQL (:15447)
+#               (una ruta por entidad)      ├→ SQL Server (:11447)
+#                                           └→ MariaDB   (:13347)
+#                                              interruptor: MOTOR_BD
 #
 # Uso: docker compose up -d --build     (UN solo comando)
 #   La API habla con PostgreSQL por defecto; para cambiar de motor
@@ -124,32 +124,6 @@ services:
         condition: service_healthy
         # ↑ v5: …y cuando el tercer motor responde (se siembra solo).
 
-  # --- API GENÉRICA C# (v6): CRUD sobre CUALQUIER tabla + JWT ---
-  # El contraste con api_facturas: allá una ruta por entidad con
-  # validación tipada; aquí /api/{tabla} descubre las columnas en
-  # runtime. Mismos tres motores, mismo interruptor.
-  api-generica-csharp:
-    build: ./api_generica_csharp
-    volumes:
-      - ./api_generica_csharp:/app   # el código montado: dotnet watch recompila
-      - /app/bin
-      - /app/obj
-    restart: unless-stopped
-    ports:
-      - "8048:8048"                  # http://localhost:8048/swagger
-    environment:
-      # El MISMO interruptor MOTOR_BD gobierna las dos APIs:
-      DatabaseProvider: ${MOTOR_BD:-postgres}
-      ConnectionStrings__Postgres: "Host=postgres;Port=5432;Database=bdfacturas_postgres_local;Username=postgres;Password=Construccion123!;Pooling=true;Maximum Pool Size=100;"
-      ConnectionStrings__SqlServer: "Server=sqlserver,1433;Database=bdfacturas_sqlserver_local;User Id=sa;Password=Construccion123!;TrustServerCertificate=True;"
-      ConnectionStrings__MariaDB: "Server=mariadb;Port=3306;Database=bdfacturas_mariadb_local;Uid=root;Pwd=Construccion123!;Allow User Variables=true;CharSet=utf8mb4;"
-    depends_on:
-      postgres:
-        condition: service_healthy
-      sqlserver-init:
-        condition: service_completed_successfully
-      mariadb:
-        condition: service_healthy
 
 volumes:
   pgdata:      # declaración del volumen nombrado (la "memoria" de la BD)

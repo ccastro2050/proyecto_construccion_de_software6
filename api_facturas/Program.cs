@@ -143,9 +143,9 @@ app.UseSwaggerUI();
 app.MapGet("/", () => Results.Json(new
 {
     mensaje = "API Facturas funcionando",
-    version = "v6",
+    version = "v5",
     motor,      // v4: a cuál motor le está hablando la API (el interruptor)
-    contratos = "docs/spec_kit/versiones/v6_api_generica/6_contracts.md"
+    contratos = "docs/spec_kit/versiones/v5_mariadb/6_contracts.md"
 }));
 
 // MapControllers enciende las rutas declaradas con atributos en los

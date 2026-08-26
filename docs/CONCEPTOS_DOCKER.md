@@ -103,7 +103,6 @@ flowchart LR
     subgraph PC["Su PC — Docker Desktop (el 'centro de datos')"]
         subgraph RED["red interna del compose (LAN virtual, con DNS propio)"]
             APIFACTURAS["SERVIDOR DE APLICACIONES<br/>contenedor api-facturas<br/>hostname: api-facturas · escucha en 8047"]
-            APIGENERICACSHARP["SERVIDOR DE APLICACIONES<br/>contenedor api-generica-csharp<br/>hostname: api-generica-csharp · escucha en 8048"]
             POSTGRES[("SERVIDOR DE BASE DE DATOS<br/>PostgreSQL · contenedor postgres<br/>hostname: postgres · escucha en 5432")]
             SQLSERVER[("SERVIDOR DE BASE DE DATOS<br/>SQL Server · contenedor sqlserver<br/>hostname: sqlserver · escucha en 1433")]
             MARIADB[("SERVIDOR DE BASE DE DATOS<br/>MariaDB/MySQL · contenedor mariadb<br/>hostname: mariadb · escucha en 3306")]
@@ -111,13 +110,9 @@ flowchart LR
         end
     end
     NAV -->|"localhost:8047"| APIFACTURAS
-    NAV -->|"localhost:8048"| APIGENERICACSHARP
     APIFACTURAS -->|"postgres:5432 (DNS de Docker)"| POSTGRES
     APIFACTURAS -->|"sqlserver:1433 (DNS de Docker)"| SQLSERVER
     APIFACTURAS -->|"mariadb:3306 (DNS de Docker)"| MARIADB
-    APIGENERICACSHARP -->|"postgres:5432 (DNS de Docker)"| POSTGRES
-    APIGENERICACSHARP -->|"sqlserver:1433 (DNS de Docker)"| SQLSERVER
-    APIGENERICACSHARP -->|"mariadb:3306 (DNS de Docker)"| MARIADB
     SQLSERVERINIT -->|"espera el healthcheck,<br/>siembra y termina"| SQLSERVER
     NAV -.->|"opcional (diagnóstico):<br/>localhost:15447"| POSTGRES
     NAV -.->|"opcional (diagnóstico):<br/>localhost:11447"| SQLSERVER
@@ -130,6 +125,7 @@ IP del contenedor — jamás `localhost`, que dentro de un contenedor es él
 mismo). Hacia su PC solo existen las puertas `localhost:PUERTO` que el
 compose publica. Por eso este mismo diseño se despliega igual en un
 servidor real: cambiar de máquina no cambia la arquitectura.
+
 
 ## 5. Docker Compose (el "un solo comando" del proyecto)
 
