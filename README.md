@@ -61,6 +61,7 @@ completa en PostgreSQL) y la API:
 | **API Facturas** — diagnóstico | http://localhost:8047/ |
 | **Swagger** (documentación interactiva: ver y probar los endpoints) | http://localhost:8047/swagger |
 | **FRONT** (v6) — la aplicación web con la marca | http://localhost:8049 |
+| ¿Cómo ENTRO al front? | 1º cree su usuario (el front no registra: lo valida la API): `curl.exe -X POST http://localhost:8047/api/usuario -H "Content-Type: application/json" -d "{\"email\":\"demo@correo.com\",\"contrasena\":\"Demo123!\"}"` — 2º entre con `demo@correo.com` / `Demo123!` |
 | Listar productos | http://localhost:8047/api/producto |
 | PostgreSQL (para SQLTools/pgAdmin, opcional) | `localhost:15447` · `postgres`/`Construccion123!` |
 | SQL Server (opcional — v4) | `localhost,11447` · `sa`/`Construccion123!` |
