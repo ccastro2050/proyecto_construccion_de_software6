@@ -60,6 +60,7 @@ completa en PostgreSQL) y la API:
 |---|---|
 | **API Facturas** — diagnóstico | http://localhost:8047/ |
 | **Swagger** (documentación interactiva: ver y probar los endpoints) | http://localhost:8047/swagger |
+| **FRONT** (v6) — la aplicación web con la marca | http://localhost:8049 |
 | Listar productos | http://localhost:8047/api/producto |
 | PostgreSQL (para SQLTools/pgAdmin, opcional) | `localhost:15447` · `postgres`/`Construccion123!` |
 | SQL Server (opcional — v4) | `localhost,11447` · `sa`/`Construccion123!` |
@@ -99,7 +100,7 @@ es **reconstruirla usted mismo, en una carpeta propia (fuera del clon)**,
 siguiendo las especificaciones — con o sin ayuda de IA:
 
 > 🤖 ¿Va a trabajar con IA? Siga la **[Guía para construir la versión con
-> IA](docs/spec_kit/versiones/v5_mariadb/GUIA_IA5.md)** — cubre los dos caminos con su prompt exacto listo
+> IA](docs/spec_kit/versiones/v6_front_producto/GUIA_IA6.md)** — cubre los dos caminos con su prompt exacto listo
 > para copiar: **chat web** (Gemini, DeepSeek, ChatGPT: qué archivos
 > subirle) e **IDE agéntico** (Antigravity, Cursor, Claude Code: cómo
 > supervisar al agente).
@@ -181,8 +182,11 @@ v3  el RESTO de las entidades: toda la bdfacturas cubierta con
     UN motor (usuario con BCrypt, tablas puente)   (cerrada: tag v3)
 v4  segundo motor (SQL Server) — nace la fábrica de
     repositorios y el interruptor MOTOR_BD   (cerrada: tag v4)
-v5  tercer motor (MariaDB) + compose completo   ← USTED ESTÁ AQUÍ
-v6  frontend FLASK (Jinja2): CRUD de las 12 entidades + login + facturación
+v5  tercer motor (MariaDB) + compose completo   (cerrada: tag v5)
+v6  el front NACE (Flask + Jinja2 + Bootstrap): marca, login y
+    producto desde el navegador   ← USTED ESTÁ AQUÍ
+v7  el front completo: las 12 entidades + menú por roles
+v8  la facturación en pantalla (maestro-detalle + anular)
 ```
 
 La regla del juego: la **constitución** es permanente, cada versión tiene
@@ -190,18 +194,18 @@ su propia spec, y una versión está TERMINADA solo cuando pasa sus criterios
 de aceptación (commit + tag). Mapa completo:
 [docs/spec_kit/versiones/0_mapa_versiones.md](docs/spec_kit/versiones/0_mapa_versiones.md).
 
-## 4. Las especificaciones de la versión actual (v5)
+## 4. Las especificaciones de la versión actual (v6)
 
 | Documento | Contenido |
 |---|---|
 | [1_constitution.md](docs/spec_kit/1_constitution.md) | Las reglas permanentes del proyecto |
-| [2_spec.md](docs/spec_kit/versiones/v5_mariadb/2_spec.md) | QUÉ agrega la v5 y sus criterios de aceptación |
-| [3_plan.md](docs/spec_kit/versiones/v5_mariadb/3_plan.md) | CÓMO: el tercer dialecto y su fábrica |
-| [4_research.md](docs/spec_kit/versiones/v5_mariadb/4_research.md) | Decisiones y alternativas (el porqué) |
-| [5_data_model.md](docs/spec_kit/versiones/v5_mariadb/5_data_model.md) | La MISMA bdfacturas, en dialecto MariaDB |
-| [6_contracts.md](docs/spec_kit/versiones/v5_mariadb/6_contracts.md) | Los contratos: idénticos en los tres motores |
-| [7_quickstart.md](docs/spec_kit/versiones/v5_mariadb/7_quickstart.md) | Arranque y la regresión TRIPLE |
-| [8_tasks.md](docs/spec_kit/versiones/v5_mariadb/8_tasks.md) | Orden de construcción por fases verificables |
+| [2_spec.md](docs/spec_kit/versiones/v6_front_producto/2_spec.md) | QUÉ agrega la v6 y sus criterios de aceptación |
+| [3_plan.md](docs/spec_kit/versiones/v6_front_producto/3_plan.md) | CÓMO: la arquitectura del front (distinta a la del back) |
+| [4_research.md](docs/spec_kit/versiones/v6_front_producto/4_research.md) | Decisiones: sesión vs JWT, Flask, la marca |
+| [5_data_model.md](docs/spec_kit/versiones/v6_front_producto/5_data_model.md) | El front NO tiene datos propios (esa es la lección) |
+| [6_contracts.md](docs/spec_kit/versiones/v6_front_producto/6_contracts.md) | Las PANTALLAS del front y sus rutas |
+| [7_quickstart.md](docs/spec_kit/versiones/v6_front_producto/7_quickstart.md) | Arranque y smoke test del front |
+| [8_tasks.md](docs/spec_kit/versiones/v6_front_producto/8_tasks.md) | Orden de construcción por fases verificables |
 
 ## 5. Material conceptual del curso
 

@@ -1,8 +1,9 @@
 # ==============================================================
 # Proyecto Construcción de Software — versión 6:
-# api_facturas (:8047) + TRES motores
+# api_facturas (:8047) + FRONT Flask (:8049) + TRES motores
 #
-#   Navegador → API FACTURAS (C#, :8047) ──┬→ PostgreSQL (:15447)
+#   Navegador → FRONT (Flask, :8049) → API FACTURAS (C#, :8047)
+#                                          ──┬→ PostgreSQL (:15447)
 #               (una ruta por entidad)      ├→ SQL Server (:11447)
 #                                           └→ MariaDB   (:13347)
 #                                              interruptor: MOTOR_BD
@@ -126,6 +127,22 @@ services:
       mariadb:
         condition: service_healthy
         # ↑ v5: …y cuando el tercer motor responde (se siembra solo).
+
+
+  # --- FRONT (v6): Flask + Jinja2 + Bootstrap — la capa de presentación ---
+  # El front NO toca la BD: su única fuente es la API (por el DNS interno).
+  front-flask:
+    build: ./front_flask
+    volumes:
+      - ./front_flask:/app           # el código montado: editar y refrescar
+    restart: unless-stopped   # si el PC se reinicia, este servicio revive con Docker
+    ports:
+      - "8049:8049"                  # http://localhost:8049
+    environment:
+      API_FACTURAS_URL: http://api-facturas:8047
+      CLAVE_SESION: Construccion123!Sesion
+    depends_on:
+      - api-facturas
 
 
 volumes:

@@ -11,7 +11,9 @@
 | **v3** | **El resto de las entidades** contra PostgreSQL: empresa, cliente, vendedor, usuario (contraseña con **BCrypt** + verificar-contrasena), rol, ruta y las tablas puente rol_usuario y rutarol — TODA la bdfacturas cubierta con UN motor antes de cambiar de motor | **Cerrada** — tag `v3` ([spec](v3_resto_entidades/2_spec.md)) |
 | **v4** | Segundo motor (**SQL Server**): la MISMA bdfacturas en dialecto T-SQL, los 11 repositorios SqlClient, la **fábrica de repositorios** (el motor se decide en UN punto), el interruptor `MOTOR_BD` y el contenedor **sqlserver-init** (la lección prometida en v1) — cero endpoints nuevos | **Cerrada** — tag `v4` ([spec](v4_sqlserver/2_spec.md)) |
 | **v5** | Tercer motor (**MariaDB**): la MISMA bdfacturas (se siembra sola, como PostgreSQL), los 11 repositorios MySqlConnector, y la cuenta de la fábrica pagada por segunda vez — UNA clase y UN case | **Cerrada** — tag `v5` ([spec](v5_mariadb/2_spec.md)) |
-| v6 | Frontend **Flask + Jinja2**: CRUD de las 12 entidades (una página por tabla), **login y control de acceso con JWT**, selects de llaves foráneas, y la **facturación maestro-detalle** usando los procedimientos almacenados | Sin especificar |
+| **v6** | **El front NACE** (Flask + Jinja2 + Bootstrap, :8049): la marca del [MANUAL_DE_MARCA](../../MANUAL_DE_MARCA.md), login con sesión sobre verificar-contrasena, y el CRUD de producto desde el navegador | **Cerrada** — tag `v6` ([spec](v6_front_producto/2_spec.md)) |
+| v7 | El front COMPLETO: las 12 entidades con selects de llaves foráneas y el menú controlado por roles (rol_usuario/rutarol por fin trabajando) | Sin especificar |
+| v8 | La facturación en pantalla: crear factura maestro-detalle (renglones + selects), anularla, y los estados vestidos con la marca | Sin especificar |
 
 > **El destino del curso:** la v5 deja la API específica COMPLETA y
 > multi-motor (toda la bdfacturas, tres motores por configuración). La
