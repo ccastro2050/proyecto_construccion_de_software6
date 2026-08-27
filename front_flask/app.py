@@ -76,9 +76,12 @@ def crear():
         datos = {
             "codigo": request.form.get("codigo", "").strip(),
             "nombre": request.form.get("nombre", "").strip(),
-            "stock": request.form.get("stock", ""),
-            "valorunitario": request.form.get("valorunitario", ""),
+            "stock": request.form.get("stock", "").strip(),
+            "valorunitario": request.form.get("valorunitario", "").strip(),
         }
+        # Lo vacío NO viaja: así el 422 de la API dice "es obligatorio"
+        # en español, en vez del error técnico de conversión de JSON:
+        datos = {k: v for k, v in datos.items() if v != ""}
         ok, errores = cliente_api.crear_producto(datos)
         if ok:
             flash(f"Producto {datos['codigo']} creado.", "exito")

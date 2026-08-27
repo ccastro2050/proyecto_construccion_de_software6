@@ -27,10 +27,12 @@ def _llamar(metodo: str, ruta: str, **kwargs):
 
 
 def _errores_del_422(cuerpo: dict) -> list[str]:
-    """El 422 de la API trae errores por campo; se aplanan a mensajes."""
-    errores = cuerpo.get("errors") or cuerpo.get("errores") or {}
+    """El 422 de la API trae la lista errores[]; se muestra uno por aviso."""
+    errores = cuerpo.get("errores") or cuerpo.get("errors") or []
+    if isinstance(errores, list):
+        return [str(e) for e in errores] or [cuerpo.get("mensaje", "Datos inválidos.")]
     if isinstance(errores, dict):
-        return [f"{campo}: {'; '.join(mensajes)}" for campo, mensajes in errores.items()]
+        return [f"{campo}: {'; '.join(m)}" for campo, m in errores.items()]
     return [str(errores)]
 
 
