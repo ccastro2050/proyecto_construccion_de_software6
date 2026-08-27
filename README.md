@@ -1,5 +1,11 @@
 # Proyecto Construcción de Software — construcción por versiones
 
+> ## 🌐 ENTRAR AL FRONT → **http://localhost:8049**
+> Usuario: **`demo@correo.com`** · Contraseña: **`Demo123!`**
+> (Primera vez: `docker compose up -d --build`, y cree el usuario
+> demo con el curl que está en la tabla de URLs, sección 2.)
+
+
 Proyecto de curso (USB Medellín). Aquí NO se descarga un sistema terminado:
 **se construye un sistema real por versiones en C# / ASP.NET Core**, guiado
 por especificaciones. El repositorio siempre contiene la **versión en
