@@ -1,5 +1,7 @@
 # Manual de Identidad Visual Corporativa — Comercial Los Andes S.A.
 
+<p align="center"><img src="img_marca/logo_negativo.svg" alt="Logosímbolo Los Andes" width="480"></p>
+
 > **Marca HIPOTÉTICA del curso.** Comercial Los Andes S.A. es la empresa
 > semilla (`E001`) de `bdfacturas`: una comercializadora que factura
 > productos de tecnología. Este manual define su identidad para que el
@@ -12,19 +14,17 @@
 
 ## 1. El logosímbolo
 
-La marca es **tipográfica** (sin isotipo dibujado — se construye con CSS,
-sin imágenes):
+La marca es **tipográfica**: "LOS ANDES" en versalitas serif + el ▲ (la
+montaña) en Ámbar Cosecha — el único adorno permitido. En el front se
+construye con texto y CSS; estos SVG son la referencia oficial:
 
-```
-   LOS ANDES        ← "LOS ANDES" en versalitas serif, Azul Cordillera
-   comercial s.a.   ← descriptor en minúsculas sans, Piedra
-```
+| Positivo (fondos claros) | Negativo (el header del front) |
+|:---:|:---:|
+| <img src="img_marca/logo_positivo.svg" width="380"> | <img src="img_marca/logo_negativo.svg" width="380"> |
 
-- **Versión horizontal** (la del encabezado del front): `LOS ANDES ▲` —
-  el triángulo (▲, la montaña) va en Ámbar Cosecha y es el único adorno
-  permitido.
-- **Versión mínima** (favicon/pestaña): solo `▲` sobre fondo Azul
-  Cordillera.
+**Versión mínima** (favicon/pestaña, y por debajo del tamaño mínimo):
+
+<img src="img_marca/logo_minimo.svg" width="72">
 
 ## 2. Planimetría, tamaño mínimo y área de reserva
 
@@ -46,13 +46,28 @@ sin imágenes):
 | **Niebla** | `#F4F2EC` | Fondo general de las páginas |
 | **Blanco** | `#FFFFFF` | Tarjetas, tablas y formularios |
 
+**La paleta, en color:**
+
+```mermaid
+flowchart LR
+    A["Azul Cordillera<br/>#17495B"]:::azul ~~~ V["Verde Páramo<br/>#2F7D5C"]:::verde ~~~ AM["Ámbar Cosecha<br/>#E39B2D"]:::ambar ~~~ R["Rojo Anulada<br/>#B4402F"]:::rojo ~~~ P["Piedra<br/>#4A4A4A"]:::piedra ~~~ N["Niebla<br/>#F4F2EC"]:::niebla
+    classDef azul fill:#17495B,color:#FFFFFF,stroke:#17495B
+    classDef verde fill:#2F7D5C,color:#FFFFFF,stroke:#2F7D5C
+    classDef ambar fill:#E39B2D,color:#3A2A00,stroke:#E39B2D
+    classDef rojo fill:#B4402F,color:#FFFFFF,stroke:#B4402F
+    classDef piedra fill:#4A4A4A,color:#FFFFFF,stroke:#4A4A4A
+    classDef niebla fill:#F4F2EC,color:#4A4A4A,stroke:#C8C4B8
+```
+
 Proporción de uso (la regla 60/30/10): 60% Niebla/Blanco (fondos),
 30% Azul Cordillera (estructura), 10% Ámbar y estados (acentos).
 
 ## 4. Escala de grises y positivo/negativo
 
 - **Escala de grises** (impresión sin color): el Azul Cordillera se
-  reemplaza por negro al 80%, el Ámbar por una trama al 30%.
+  reemplaza por negro al 80%, el Ámbar por una trama al 30%:
+
+  <img src="img_marca/logo_grises.svg" width="340">
 - **Positivo:** logotipo Azul Cordillera sobre fondo claro (Niebla/Blanco).
 - **Negativo:** logotipo Blanco sobre fondo Azul Cordillera (así va en el
   encabezado del front). El ▲ conserva SIEMPRE el Ámbar en ambos casos.
