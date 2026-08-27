@@ -14,7 +14,7 @@
 #                      docker compose up -d api-facturas
 # Reset de las BD: docker compose down -v && docker compose up -d
 #
-# Este archivo CRECE por versiones: v7 sumará el front Flask (Jinja2).
+# La ruta continúa: v7 (12 entidades) y v8 (facturación) en los repos 7 y 8.
 # ==============================================================
 services:
 
